@@ -10,7 +10,6 @@ import java.io.Serializable;
 @XmlAccessorType(value = XmlAccessType.FIELD)
 public class GermanWord implements Serializable{
 
-    @XmlAttribute
     private String name;
     private Gender gender;
 
