@@ -6,7 +6,7 @@
   <packaging>war</packaging>
   <name>Spring 3.2 MVC Sample</name>
   <properties>
-		<spring.version>3.2.0.RELEASE</spring.version>
+		<spring.version>3.2.1.RELEASE</spring.version>
 		<jetty.version>8.1.7.v20120910</jetty.version>
 	</properties>
 	<dependencies>
@@ -49,6 +49,30 @@
 	   		<version>${spring.version}</version>
 	   		<scope>test</scope>
 	 	</dependency>
+
+        <!--  Gson: Java to Json conversion -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Redis -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+            <version>1.0.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.0.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
 	 	<dependency>
 	 		<groupId>cglib</groupId>
 	 		<artifactId>cglib</artifactId>
