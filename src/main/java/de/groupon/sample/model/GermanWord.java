@@ -13,6 +13,13 @@ public class GermanWord implements Serializable{
     private String name;
     private Gender gender;
 
+    public GermanWord(String name) {
+        this.name = name;
+    }
+
+    public GermanWord() {
+    }
+
     public Gender getGender() {
         return gender;
     }
@@ -27,5 +34,22 @@ public class GermanWord implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GermanWord that = (GermanWord) o;
+
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
     }
 }

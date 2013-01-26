@@ -3,6 +3,9 @@ package de.groupon.sample.model;
 public class ErrorDetail {
     private String message;
 
+    public ErrorDetail() {
+    }
+
     public ErrorDetail(String message) {
         this.message = message;
     }

@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class RedisWordServiceImpl implements WordService{
@@ -19,7 +22,7 @@ public class RedisWordServiceImpl implements WordService{
 
     @Override
     public void save(GermanWord word){
-        redisTemplate.opsForHash().put(KEY,word.getName(),word);
+        redisTemplate.opsForHash().put(KEY, word.getName(), word);
     }
 
     @Override
@@ -38,7 +41,14 @@ public class RedisWordServiceImpl implements WordService{
 
     @Override
     public Collection<GermanWord> getAll(){
-        return redisTemplate.opsForList().range(KEY,0l,-1l);
+        List<GermanWord> vals = new ArrayList<GermanWord>();
+        final List<Object> values = redisTemplate.opsForHash().values(KEY);
+        for (Object value : values) {
+            if(value instanceof  GermanWord){
+                vals.add((GermanWord) value);
+            }
+        }
+        return vals;
     }
 
 }

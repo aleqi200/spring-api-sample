@@ -1,5 +1,7 @@
 package de.groupon.sample.config.context;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import de.groupon.sample.config.GSONHttpMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.ContentNegotiationConfi
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Configuration

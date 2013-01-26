@@ -1,16 +1,18 @@
-package de.groupon.sample;
+package de.groupon.sample.api;
 
+import de.groupon.sample.exception.AlreadyExistsException;
 import de.groupon.sample.exception.NotFoundException;
 import de.groupon.sample.model.ErrorDetail;
 import de.groupon.sample.model.ResponseError;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class ExceptionHandler {
+public class ExceptionHandlerBinder {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
@@ -27,4 +29,10 @@ public class ExceptionHandler {
         return new ResponseError(new ErrorDetail(exception.getMessage()));
     }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(AlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    @ResponseBody
+    public ResponseError handleException(final AlreadyExistsException exception) {
+        return new ResponseError(new ErrorDetail(exception.getMessage()));
+    }
 }
