@@ -2,6 +2,7 @@ package de.groupon.sample.api.resource;
 
 
 import de.groupon.sample.exception.AlreadyExistsException;
+import de.groupon.sample.exception.InvalidParamException;
 import de.groupon.sample.exception.NotFoundException;
 import de.groupon.sample.model.GermanWord;
 import de.groupon.sample.model.enumerations.Gender;
@@ -12,9 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Collection;
 
 @Controller
@@ -45,7 +49,7 @@ public class WordResource {
     @RequestMapping(method = RequestMethod.POST,
             consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
-    public ResponseEntity<GermanWord> createWord(@RequestBody GermanWord data, HttpServletRequest request)  {
+    public ResponseEntity<GermanWord> createWord(@Valid @RequestBody(required = true) GermanWord data, HttpServletRequest request) throws InvalidParamException {
         wordService.save(data);
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Location", request.getRequestURL().toString() + "/"+data.getName());
@@ -79,10 +83,11 @@ public class WordResource {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/client/{clientId}", method = RequestMethod.PUT,
+    @RequestMapping(value = "/client/{clientId}", method = {RequestMethod.PUT,RequestMethod.PATCH},
             produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
     )
-    public GermanWord updateWord(@PathVariable("clientId") String clientId, @RequestBody GermanWord info) throws NotFoundException {
+    public GermanWord updateWord(@PathVariable("clientId")  String clientId, @RequestBody(required = true) @Valid GermanWord info)
+            throws NotFoundException, InvalidParamException {
         wordService.getWord(info.getName());
         wordService.save(info);
         return info;

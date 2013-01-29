@@ -33,6 +33,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("sample-api", new DispatcherServlet(applicationContext));
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/*");
+        dispatcher.addMapping("/");
     }
 }

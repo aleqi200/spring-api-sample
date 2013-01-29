@@ -1,7 +1,9 @@
 package de.groupon.sample.model;
 
 import de.groupon.sample.model.enumerations.Gender;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
@@ -10,7 +12,10 @@ import java.io.Serializable;
 @XmlAccessorType(value = XmlAccessType.FIELD)
 public class GermanWord implements Serializable{
 
+    @NotNull
+    @NotEmpty
     private String name;
+    @NotNull
     private Gender gender;
 
     public GermanWord(String name) {
