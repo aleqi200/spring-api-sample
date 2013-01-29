@@ -7,20 +7,19 @@ import java.util.List;
 
 public class InvalidParamException extends Exception {
 
-    private Errors errors;
-
-    public InvalidParamException(Errors errors) {
-        this.errors = errors;
+    public InvalidParamException() {
+        super();
     }
 
-    @Override
-    public String getMessage() {
-        StringBuffer message = new StringBuffer();
-        final List<FieldError> fieldErrors = errors.getFieldErrors();
+    public InvalidParamException(String s) {
+        super(s);
+    }
 
-        for (FieldError fieldError : fieldErrors) {
-            message.append(fieldError.getDefaultMessage());
-        }
-        return message.toString();
+    public InvalidParamException(String s, Throwable throwable) {
+        super(s, throwable);
+    }
+
+    public InvalidParamException(Throwable throwable) {
+        super(throwable);
     }
 }
